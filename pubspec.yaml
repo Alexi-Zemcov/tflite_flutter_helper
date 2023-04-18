@@ -14,9 +14,10 @@ dependencies:
   quiver: ^3.0.1
   path_provider: ^2.0.1
   tflite_flutter:
-    git:
-      url: https://github.com/vgobbi8/tflite_flutter_plugin
-      ref: master
+    path: ../tflite_flutter_plugin
+  #    git:
+#      url: https://github.com/vgobbi8/tflite_flutter_plugin
+#      ref: master
   tuple: ^2.0.0
   camera: ^0.8.1+3
   ffi: ^2.0.1

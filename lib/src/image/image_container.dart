@@ -2,9 +2,9 @@ import 'package:camera/camera.dart';
 import 'package:image/image.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:tflite_flutter_helper/src/image/base_image_container.dart';
+import 'package:tflite_flutter_helper/src/image/color_space_type.dart';
 import 'package:tflite_flutter_helper/src/image/image_conversions.dart';
 import 'package:tflite_flutter_helper/src/tensorbuffer/tensorbuffer.dart';
-import 'package:tflite_flutter_helper/src/image/color_space_type.dart';
 
 class ImageContainer extends BaseImageContainer {
   late final Image _image;
@@ -24,10 +24,12 @@ class ImageContainer extends BaseImageContainer {
 
   @override
   ColorSpaceType get colorSpaceType {
-    int len = _image.data.length;
+    final data = _image.data;
+    if (data == null) throw Exception('No image data');
+    int len = data.length;
     bool isGrayscale = true;
-    for (int i = (len / 4).floor(); i < _image.data.length; i++) {
-      if (_image.data[i] != 0) {
+    for (int i = (len / 4).floor(); i < data.length; i++) {
+      if (data.elementAt(i) != 0) {
         isGrayscale = false;
         break;
       }
